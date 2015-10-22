@@ -1,12 +1,18 @@
+using Nancy;
+
 namespace GitHub.Status
 {
-    using Nancy;
-    
     public class HomeModule : NancyModule
     {
         public HomeModule()
         {
-            Get["/"] = _ => "Hello World";
+            Get["/"] = _ => {
+             return "Hello Mac";
+            };
+                        
+            Get["/github/status/{key}"] = parameters => {
+                return "parameters.key";
+            };
         }
     }
 }
