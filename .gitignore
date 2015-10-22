@@ -230,3 +230,4 @@ _Pvt_Extensions
 .fake/
 
 .vscode
+.DS_Store
