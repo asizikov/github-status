@@ -11,7 +11,10 @@ namespace GitHub.Status
             };
                         
             Post["/github/status/{key}"] = parameters => {
-                var key = parameters.key;
+                var key = parameters.key as string;
+                if(string.IsNullOrEmpty(key) || key != "secretKey"){
+                    return HttpStatusCode.Forbidden;
+                }
                 return key;
             };
         }
