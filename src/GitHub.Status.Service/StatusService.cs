@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GitHub.Status.Model;
+using GitHub.Status.Service.Model;
 using Octokit;
 
 namespace GitHub.Status.Service

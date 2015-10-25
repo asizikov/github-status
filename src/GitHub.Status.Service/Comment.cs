@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GitHub.Status.Model
+namespace GitHub.Status.Service.Model
 {
     public class User
     {

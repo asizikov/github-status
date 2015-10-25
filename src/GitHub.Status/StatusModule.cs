@@ -1,5 +1,5 @@
 using System;
-using GitHub.Status.Model;
+using GitHub.Status.Service.Model;
 using GitHub.Status.Service;
 using Microsoft.Framework.Configuration;
 using Nancy;
