@@ -1,24 +1,16 @@
 using Xunit;
+using GitHub.Status.Service;
 
-namespace MyFirstDnxUnitTests
+namespace GitHub.Status.Service
 {
-    public class Class1
+    public class StatusSerivceTests
     {
+        public class Constructor {
         [Fact]
-        public void PassingTest()
+        public void ThrowsWhenNoConfigurationProvided()
         {
-            Assert.Equal(4, Add(2, 2));
-        }
-
-        [Fact]
-        public void FailingTest()
-        {
-            Assert.Equal(5, Add(2, 2));
-        }
-
-        int Add(int x, int y)
-        {
-            return x + y;
-        }
+            
+            Assert.Throws<ArgumentNullException>(() => new StatusService(null));
+        }    
     }
 }
