@@ -1,0 +1,15 @@
+version: 0.1.0.{build}  
+os: Windows Server 2012
+
+init:
+  - git config --global core.autocrlf input
+
+shallow_clone: true 
+
+configuration: Release
+install:
+  - dnvm install 1.0.0-beta8
+  - dnvm upgrade
+  - dnu restore
+  
+test: off
