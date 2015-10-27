@@ -9,3 +9,5 @@ shallow_clone: true
 configuration: Release
 install:
   - dnvm install 1.0.0-beta8
+  - dnvm upgrade
+  - dnu restore
