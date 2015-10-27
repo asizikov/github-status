@@ -1,5 +1,4 @@
 version: 0.1.0.{build}  
-
 os: Windows Server 2012
 
 init:
@@ -10,61 +9,3 @@ shallow_clone: true
 configuration: Release
 install:
   - dnvm install 1.0.0-beta8
-			
-build:
-  parallel: true                  # enable MSBuild parallel builds
-  project: src/GitHub.Status/GitHub.Status.sln        # path to Visual Studio solution or project
-  publish_nuget: true             # package projects with .nuspec files and push to artifacts
-  publish_nuget_symbols: true     # generate and publish NuGet symbol packages
-
-  # MSBuild verbosity level
-  verbosity: normal # quiet|minimal|normal|detailed
-
-
-# scripts to run before build
-before_build:
-  - nuget restore src\src\GitHub.Status\GitHub.Status.sln
-
-# scripts to run after build
-#after_build:
-
-# to run your custom scripts instead of automatic MSBuild
-build_script:
-
-# to disable automatic builds
-#build: off
-
-#---------------------------------#
-#       tests configuration       #
-#---------------------------------#
-
-#test:
-#  assemblies:
-#    - 
-
-#---------------------------------#
-#      artifacts configuration    #
-#---------------------------------#
-
-#artifacts:
-#  - path: src\NAME\bin\$(configuration)
-#    name: NAME	
-
-#  - path: '**\NAME.nupkg'
-
-#---------------------------------#
-#     deployment configuration    #
-#---------------------------------#
-
-
-# scripts to run before deployment
-before_deploy:
-
-# scripts to run after deployment
-after_deploy:
-
-# to run your custom scripts instead of provider deployments
-deploy_script:
-
-# to disable deployment
-#deploy: off
