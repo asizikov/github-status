@@ -6,4 +6,4 @@ install:
    - dnvm upgrade
    - dnu restore
 script:
-   - dnx /home/travis/build/asizikov/github-status/src/GitHub.Status.Tests/project.json test -parallel none
+   - dnx /home/travis/build/asizikov/github-status/src/GitHub.Status.Service.Tests/project.json test -parallel none
