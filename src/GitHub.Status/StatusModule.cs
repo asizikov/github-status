@@ -11,9 +11,9 @@ namespace GitHub.Status
     {
         private IConfiguration Configuration { get; }
         private string Secret { get; }
-        private StatusSerivce GitHubStatus { get; }
+        private StatusService GitHubStatus { get; }
 
-        public StatusModule(IConfiguration configuration, StatusSerivce service)
+        public StatusModule(IConfiguration configuration, StatusService service)
         {
             if (configuration == null)
             {

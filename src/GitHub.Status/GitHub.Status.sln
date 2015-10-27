@@ -12,14 +12,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFi
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GitHub.Status.Service", "..\GitHub.Status.Service\GitHub.Status.Service.xproj", "{9C7B6D7C-30FD-429B-944D-3FDB280FEBF3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4CAAE81C-E045-409B-9311-A68097451DD9}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GitHub.Status.Service.Tests", "..\..\test\GitHub.Status.Service.Tests\GitHub.Status.Service.Tests.xproj", "{6A2B06F6-F907-4C2E-8ED6-66272937C834}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2B3B370B-AAAF-4BA5-AC4C-D66BBBF596AC}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\test\global.json = ..\..\test\global.json
 	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GitHub.Status.Service.Tests", "..\GitHub.Status.Service.Tests\GitHub.Status.Service.Tests.xproj", "{6A2B06F6-F907-4C2E-8ED6-66272937C834}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,8 +40,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{6A2B06F6-F907-4C2E-8ED6-66272937C834} = {4CAAE81C-E045-409B-9311-A68097451DD9}
 	EndGlobalSection
 EndGlobal
