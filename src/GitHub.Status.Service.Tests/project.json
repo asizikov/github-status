@@ -8,9 +8,7 @@
     "dependencies": {
         "xunit": "2.1.0",
         "xunit.runner.dnx": "2.1.0-*",
-        "GitHub.Status.Service" : {
-            "version":  "0.1.0-*"
-            }
+        "GitHub.Status.Service": "0.1.0-*"
     },
     "commands": {
         "test": "xunit.runner.dnx"

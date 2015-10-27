@@ -7,11 +7,12 @@ using Octokit;
 
 namespace GitHub.Status.Service
 {
-    public class StatusSerivce
+    public class StatusService
     {
         private IGitHubClient Client { get; }
         private IStatusServiceConfiguration Configuration { get; }
-        public StatusSerivce(IStatusServiceConfiguration statusServiceConfiguration)
+
+        public StatusService(IStatusServiceConfiguration statusServiceConfiguration)
         {
             if (statusServiceConfiguration == null)
             {
@@ -21,16 +22,13 @@ namespace GitHub.Status.Service
 
             Client = new GitHubClient(new ProductHeaderValue("github-status"))
             {
-                Credentials =
-                    new Credentials(
-                        Configuration.GitHubUserName,
-                        Configuration.GitHubPassword)
+                Credentials = new Credentials(Configuration.GitHubUserName, Configuration.GitHubPassword)
             };
         }
 
         public async Task UpdateStatusAsync(Payload payload)
         {
-            var status = await EvaluateReviewStatusAsync(payload, Configuration.Treshold).ConfigureAwait(false);
+            var status = await EvaluateReviewStatusAsync(payload, Configuration.Threshold).ConfigureAwait(false);
             await SendStatusAsync(payload, status).ConfigureAwait(false);
         }
 
@@ -44,20 +42,13 @@ namespace GitHub.Status.Service
             {
                 var comments = await Client.Issue.Comment.GetAllForIssue(owner, repo, issueNumber).ConfigureAwait(false);
                 var reviewers = new HashSet<string>();
-                foreach (var comment in comments)
+                foreach (var comment in comments.Where(comment => comment.Body.Contains(Configuration.ReviewedMessage)))
                 {
-                    if (comment.Body.Contains(Configuration.ReviewedMessage))
-                    {
-                        reviewers.Add(comment.User.Login);
-                    }
+                    reviewers.Add(comment.User.Login);
                 }
                 if (reviewers.Count > (threshold - 1))
                 {
-                    return new ReviewStatus
-                    {
-                        Comment = "Reviewed",
-                        Status = CommitState.Success
-                    };
+                    return new ReviewStatus { Comment = "Reviewed", Status = CommitState.Success };
                 }
                 return new ReviewStatus
                 {
@@ -76,19 +67,17 @@ namespace GitHub.Status.Service
         {
             var owner = payload.repository.owner.login;
             var repo = payload.repository.name;
-            var repository = await Client.Repository.Get(owner, repo);
             var issueNumber = payload.issue.number;
-            var commits = await Client.Repository.PullRequest.Commits(owner, repo, issueNumber);
+            var commits = await Client.Repository.PullRequest.Commits(owner, repo, issueNumber).ConfigureAwait(false);
             var lastCommit = commits.Last();
 
             var commitStatus = new NewCommitStatus
             {
                 Context = "code-review/treshold",
                 State = status.Status,
-                Description = status.Comment,
-
+                Description = status.Comment
             };
-            await Client.Repository.CommitStatus.Create(owner, repo, lastCommit.Sha, commitStatus);
+            await Client.Repository.CommitStatus.Create(owner, repo, lastCommit.Sha, commitStatus).ConfigureAwait(false);
         }
     }
 }

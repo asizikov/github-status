@@ -1,9 +1,10 @@
-language: CSharp
-  mono:
+language: csharp
+mono:
    - latest
- install:
+install:
    - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | DNX_BRANCH=dev sh && source ~/.dnx/dnvm/dnvm.sh
    - dnvm upgrade
    - dnu restore
- script:
-   - dnx /home/travis/build/asizikov/github-status/test/project.json test -parallel none
+script:
+   - cd /home/travis/build/asizikov/github-status/src/GitHub.Status.Service.Tests
+   - dnx test -parallel none

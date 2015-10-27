@@ -5,6 +5,6 @@ namespace GitHub.Status.Service
         string GitHubUserName { get; }
         string GitHubPassword { get; }
         string ReviewedMessage { get; }
-        int Treshold { get; }
+        int Threshold { get; }
     }
 }

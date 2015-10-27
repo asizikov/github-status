@@ -1,45 +1,35 @@
-using System;
-using Microsoft.Framework.Configuration;
 using GitHub.Status.Service;
+using Microsoft.Framework.Configuration;
 
-namespace GitHub.Status{
-	public class StatusServiceConfiguration : IStatusServiceConfiguration{
-		private IConfiguration Configuration {get;}
-		public StatusServiceConfiguration(IConfiguration configuration){
-			Configuration = configuration;
-		}
+namespace GitHub.Status
+{
+    public class StatusServiceConfiguration : IStatusServiceConfiguration
+    {
+        private IConfiguration Configuration { get; }
+
+        public StatusServiceConfiguration(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         public string GitHubPassword
         {
-            get
-            {
-                return Configuration["AppSettings:GitHubPassword"];
-            }
+            get { return Configuration["AppSettings:GitHubPassword"]; }
         }
 
         public string GitHubUserName
         {
-            get
-            {
-                return Configuration["AppSettings:GitHubUserName"];
-            }
+            get { return Configuration["AppSettings:GitHubUserName"]; }
         }
 
         public string ReviewedMessage
         {
-            get
-            {
-                return Configuration["AppSettings:ReviewedMessage"];
-            }
+            get { return Configuration["AppSettings:ReviewedMessage"]; }
         }
 
-        public int Treshold
+        public int Threshold
         {
-            get
-            {
-                
-                return int.Parse(Configuration["AppSettings:Treshold"]);
-            }
+            get { return int.Parse(Configuration["AppSettings:Threshold"]); }
         }
     }
 }
