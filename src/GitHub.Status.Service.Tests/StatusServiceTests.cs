@@ -10,7 +10,7 @@ namespace GitHub.Status.Service.Tests
             [Fact]
             public void ThrowsWhenNoConfigurationProvided()
             {
-                Assert.Throws<ArgumentNullException>(() => new StatusService(null));
+                Assert.Throws<ArgumentNullException>(() => new StatusService(null, null));
             }
         }
     }

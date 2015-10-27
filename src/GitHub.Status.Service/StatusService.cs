@@ -12,18 +12,19 @@ namespace GitHub.Status.Service
         private IGitHubClient Client { get; }
         private IStatusServiceConfiguration Configuration { get; }
 
-        public StatusService(IStatusServiceConfiguration statusServiceConfiguration)
+        public StatusService(IStatusServiceConfiguration statusServiceConfiguration, IGitHubClientFactory clientFactory)
         {
             if (statusServiceConfiguration == null)
             {
                 throw new ArgumentNullException(nameof(statusServiceConfiguration));
             }
+            if(clientFactory == null)
+            {
+                throw new ArgumentNullException(nameof(clientFactory));
+            }
             Configuration = statusServiceConfiguration;
 
-            Client = new GitHubClient(new ProductHeaderValue("github-status"))
-            {
-                Credentials = new Credentials(Configuration.GitHubUserName, Configuration.GitHubPassword)
-            };
+            Client = clientFactory.Create();
         }
 
         public async Task UpdateStatusAsync(Payload payload)
@@ -35,12 +36,12 @@ namespace GitHub.Status.Service
         private async Task<ReviewStatus> EvaluateReviewStatusAsync(Payload payload, int threshold)
         {
             var owner = payload.repository.owner.login;
-            var repo = payload.repository.name;
+            var repositoryName = payload.repository.name;
             var issueNumber = payload.issue.number;
-            var pullRequest = await Client.Repository.PullRequest.Get(owner, repo, issueNumber).ConfigureAwait(false);
+            var pullRequest = await Client.Repository.PullRequest.Get(owner, repositoryName, issueNumber).ConfigureAwait(false);
             if (pullRequest != null)
             {
-                var comments = await Client.Issue.Comment.GetAllForIssue(owner, repo, issueNumber).ConfigureAwait(false);
+                var comments = await Client.Issue.Comment.GetAllForIssue(owner, repositoryName, issueNumber).ConfigureAwait(false);
                 var reviewers = new HashSet<string>();
                 foreach (var comment in comments.Where(comment => comment.Body.Contains(Configuration.ReviewedMessage)))
                 {

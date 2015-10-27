@@ -1,6 +1,6 @@
 namespace GitHub.Status.Service
 {
-	public interface IStatusServiceConfiguration
+    public interface IStatusServiceConfiguration
     {
         string GitHubUserName { get; }
         string GitHubPassword { get; }
