@@ -9,11 +9,8 @@ shallow_clone: true
 
 configuration: Release
 install:
-	- cmd: >-
-    	set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
-    	dnvm install 1.0.0-beta8
-		dnvm update-self
-	
+	- dnvm install 1.0.0-beta8
+			
 build:
   parallel: true                  # enable MSBuild parallel builds
   project: src/GitHub.Status/GitHub.Status.sln        # path to Visual Studio solution or project
