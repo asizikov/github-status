@@ -9,7 +9,7 @@ shallow_clone: true
 
 configuration: Release
 install:
-	- dnvm install 1.0.0-beta8
+  - dnvm install 1.0.0-beta8
 			
 build:
   parallel: true                  # enable MSBuild parallel builds
