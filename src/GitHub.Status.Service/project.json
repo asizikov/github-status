@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0-*",
+  "tooling": {
+    "defaultNamespace": "GitHub.Status.Service"
+  },
+  "description": "Status service",
+  "compilationOptions": {
+    "warningsAsErrors": true
+  },
+  "dependencies": {
+    "Octokit": "0.16.0"
+  },
+  "frameworks": {
+    "dnx451": {}
+  }
+}
