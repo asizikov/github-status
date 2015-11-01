@@ -7,7 +7,7 @@ using Octokit;
 
 namespace GitHub.Status.Service
 {
-    public class StatusService
+    public sealed class StatusService
     {
         private IGitHubClient Client { get; }
         private IStatusServiceConfiguration Configuration { get; }
@@ -18,7 +18,7 @@ namespace GitHub.Status.Service
             {
                 throw new ArgumentNullException(nameof(statusServiceConfiguration));
             }
-            if(clientFactory == null)
+            if (clientFactory == null)
             {
                 throw new ArgumentNullException(nameof(clientFactory));
             }
@@ -38,10 +38,12 @@ namespace GitHub.Status.Service
             var owner = payload.repository.owner.login;
             var repositoryName = payload.repository.name;
             var issueNumber = payload.issue.number;
-            var pullRequest = await Client.Repository.PullRequest.Get(owner, repositoryName, issueNumber).ConfigureAwait(false);
+            var pullRequest =
+                await Client.Repository.PullRequest.Get(owner, repositoryName, issueNumber).ConfigureAwait(false);
             if (pullRequest != null)
             {
-                var comments = await Client.Issue.Comment.GetAllForIssue(owner, repositoryName, issueNumber).ConfigureAwait(false);
+                var comments =
+                    await Client.Issue.Comment.GetAllForIssue(owner, repositoryName, issueNumber).ConfigureAwait(false);
                 var reviewers = new HashSet<string>();
                 foreach (var comment in comments.Where(comment => comment.Body.Contains(Configuration.ReviewedMessage)))
                 {
