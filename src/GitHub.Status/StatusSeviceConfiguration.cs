@@ -12,24 +12,12 @@ namespace GitHub.Status
             Configuration = configuration;
         }
 
-        public string GitHubPassword
-        {
-            get { return Configuration["AppSettings:GitHubPassword"]; }
-        }
+        public string GitHubPassword => Configuration["AppSettings:GitHubPassword"];
 
-        public string GitHubUserName
-        {
-            get { return Configuration["AppSettings:GitHubUserName"]; }
-        }
+        public string GitHubUserName => Configuration["AppSettings:GitHubUserName"];
 
-        public string ReviewedMessage
-        {
-            get { return Configuration["AppSettings:ReviewedMessage"]; }
-        }
+        public string ReviewedMessage => Configuration["AppSettings:ReviewedMessage"];
 
-        public int Threshold
-        {
-            get { return int.Parse(Configuration["AppSettings:Threshold"]); }
-        }
+        public int Threshold => int.Parse(Configuration["AppSettings:Threshold"]);
     }
 }
