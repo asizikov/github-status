@@ -4,6 +4,6 @@
     "GitHubUserName" : "#",
     "GitHubPassword" : "#",
     "ReviewedMessage" : ":shipit:",
-    "Threshold": 2
+    "Threshold": 1
   }
 }

@@ -81,17 +81,6 @@ namespace GitHub.Status.Service
                 Description = status.Comment
             };
             await Client.Repository.CommitStatus.Create(owner, repo, lastCommit.Sha, commitStatus).ConfigureAwait(false);
-            
-            
-            var newDeployment = new NewDeployment();
-            newDeployment.Ref = lastCommit.Sha;
-            newDeployment.Description = "Test enviromnemt";
-            
-            var deployment = await Client.Repository.Deployment.Create(owner,repo, newDeployment);
-            var deploymentStatus = new NewDeploymentStatus();
-            deploymentStatus.Description = "deployment started";
-            deploymentStatus.State = DeploymentState.Failure;
-            await Client.Repository.Deployment.Status.Create(owner,repo,deployment.Id,deploymentStatus);
         }
     }
 }
